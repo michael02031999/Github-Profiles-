@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@200;400;700&family=Montserrat:wght@400;700&family=Mulish:wght@200;400;600;700&family=Poppins:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(42, 43, 114);
+  height: 100vh;
+  width: 100%;
+
+  display: block;
+
+  font-family: "Poppins", sans-serif;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+}
+
+#searchbar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 100vw;
+  height: 50px;
+  background-color: rgb(76, 41, 133);
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  padding-left: 15px;
+  font-size: 17.5px;
+  margin: 0 auto;
+  color: white;
+}
+
+#searchbar:focus {
+  cursor: auto;
+  color: white;
+
+  caret-color: white;
+}
+
+#searchbar::placeholder {
+  color: rgb(187, 187, 187);
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+}
+
+#container4Error {
+  display: none;
+  padding: 10px;
+  background-color: rgb(76, 41, 133);
+  margin-top: 50px;
+
+  border-radius: 5px;
+  grid-template-columns: 50px 1fr;
+  grid-column-gap: 120px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 265px;
+  border-radius: 20px;
+  padding: 50px;
+  height: fit-content;
+
+  width: 95%;
+}
+
+#container {
+  display: none;
+  padding: 10px;
+  background-color: rgb(76, 41, 133);
+  margin-top: 40px;
+
+  border-radius: 5px;
+  grid-template-columns: 50px 1fr;
+  grid-column-gap: 120px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 265px;
+  border-radius: 20px;
+  padding: 50px;
+  height: fit-content;
+
+  width: 95%;
+}
+
+#logo {
+  display: none;
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  border: 10px solid rgb(42, 43, 114);
+  background-color: red;
+}
+
+#FFR {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+#information {
+  color: white;
+}
+
+#bio {
+  margin-top: 15px;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+#namesOfRepos {
+  font-size: 10px;
+  display: flex;
+  gap: 7.5px;
+  flex-wrap: wrap;
+  margin-top: 12.5px;
+  width: 105%;
+}
+
+@media screen and (min-width: 650px) {
+  #searchbar {
+    width: 625px;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  #container {
+    max-width: 700px;
+  }
+}
