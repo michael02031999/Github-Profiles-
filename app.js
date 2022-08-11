@@ -13,27 +13,75 @@ let namesOfRepos = document.getElementById("namesOfRepos");
 
 let container4Error = document.getElementById("container4Error");
 
+searchbar.addEventListener("paste", whatsInTheSearchbar);
 searchbar.addEventListener("keydown", whatsInTheSearchbar);
 
 let phrase = "";
 
-function whatsInTheSearchbar(e) {
+/* async function pasteFunction(e) {
+  console.log(e);
+
+  console.log(e.key);
+
+  githubSearch(searchQueryURL);
+} */
+
+let isMeta = false;
+
+async function whatsInTheSearchbar(e) {
+  console.log(e);
+
+  if (e.key == "Meta") {
+    isMeta = true;
+  }
+
+  console.log(isMeta);
+
   if (e.key == "Backspace") {
     phrase = phrase.substring(0, phrase.length - 1);
   }
-  if (e.key != "Backspace" && e.key != "Enter") {
+  if (
+    e.key != "Tab" &&
+    e.key != "Backspace" &&
+    e.key != "Enter" &&
+    String.fromCharCode(e.keyCode).match(/(\w|\s)/g) &&
+    isMeta == false
+  ) {
     phrase = phrase.concat(e.key);
+
+    console.log("did it fire");
+    console.log(isMeta);
   }
   if (e.key == "Enter") {
-    searchQueryURL = searchQueryURL.concat("users/" + phrase);
+    if (phrase == "") {
+      let text = await navigator.clipboard.readText();
 
-    githubSearch(searchQueryURL);
+      console.log(phrase);
 
-    searchQueryURL = "https://api.github.com/";
+      searchQueryURL = searchQueryURL.concat("users/" + text);
 
-    phrase = "";
-    console.log(searchQueryURL);
+      // searchQueryURL = searchQueryURL.concat("users/" + phrase);
+
+      searchbar.value = "";
+
+      githubSearch(searchQueryURL);
+
+      searchQueryURL = "https://api.github.com/";
+
+      phrase = "";
+    } else {
+      searchQueryURL = searchQueryURL.concat("users/" + phrase);
+      githubSearch(searchQueryURL);
+      phrase = "";
+      searchQueryURL = "https://api.github.com/";
+    }
   }
+
+  if (e.key == "v") {
+    isMeta = false;
+  }
+
+  console.log(phrase);
 }
 
 async function githubSearch() {
@@ -42,8 +90,6 @@ async function githubSearch() {
   let trueResponse = await fetch(searchQueryURL)
     .then((result) => result.json())
     .then((response) => response);
-
-  console.log(trueResponse);
 
   if (trueResponse.message == "Not Found") {
     container.style.display = "none";
@@ -71,7 +117,6 @@ async function githubSearch() {
     //console.log(allRepos[0]["name"]);
 
     for (let i = 0; i < 5; i++) {
-      console.log(allRepos[i]);
       if (allRepos[i] == undefined) {
         break;
       }
